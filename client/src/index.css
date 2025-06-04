@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Wallpoet&display=swap');
+@import "tailwindcss";
+
+* {
+    font-family: "Outfit", sans-serif;
+}
+
+@theme {
+    --color-primary: #F97316;
+    --color-primary-dull: #EA580C;
+    --color-secondary: #1A1A1A;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
