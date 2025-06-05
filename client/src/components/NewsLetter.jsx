@@ -3,7 +3,7 @@ import React from 'react'
 const NewsLetter = () => {
     
         return (
-            <div className="flex flex-col items-center justify-center text-center space-y-2 text-white mt-20 pb-14">
+            <div id='offers' className="flex flex-col items-center justify-center text-center space-y-2 text-white mt-20 pb-14">
                 <h1 className="md:text-4xl text-2xl font-semibold">Get Books at your Fingertips!</h1>
                 <p className="md:text-lg text-gray-500/70 pb-8">
                     We will share with you the must reads, classical, and other suggestions

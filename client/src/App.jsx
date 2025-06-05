@@ -19,6 +19,10 @@ import AddProduct from './components/seller/AddProduct.jsx'
 import ProductList from './components/seller/ProductList.jsx'
 import Orders from './components/seller/Orders.jsx'
 import About from './pages/About.jsx'
+import OrderSuccess from './pages/OrderSuccess.jsx'
+import NeedHelp from './pages/NeedHelp.jsx'
+import  Contact  from './pages/Contact.jsx'
+import FAQs from './pages/FAQs.jsx'
 
 const App = () => {
 
@@ -42,6 +46,10 @@ const App = () => {
           <Route path='/add-address' element={<AddAddress/>}/>
           <Route path='/my-orders' element={<MyOrders/>}/>
           <Route path='/about' element={<About/>}/>
+          <Route path="/order-success" element={<OrderSuccess />} />
+          <Route path="/need-help" element={<NeedHelp />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/faqs" element={<FAQs />} />
           <Route path='/seller' element={isSeller ? <SellerLayout/> : <SellerLogin/>}>
             <Route index element={isSeller ? <AddProduct/> : null}/>
             <Route path='product-list' element={<ProductList/>}/>

@@ -29,7 +29,7 @@ const Cart = () => {
     }, [products, cartItems])
 
     const placeOrder = async ()=> {
-
+        navigate("/order-success")
     }
 
 

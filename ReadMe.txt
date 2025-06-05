@@ -1,35 +1,43 @@
-# 📚 Islamic Books
+📚 Islamic Books
 
-**Live Site:** [https://islamic-books.vercel.app/](https://islamic-books.vercel.app/)
+Live Site: https://islamic-books.vercel.app/
 
-**Author:** Sharukh Ahmed
+Built By: Sharukh Ahmed
 
-**Description:**
-Islamic Books is a modern, full-featured Islamic book store built to share and sell classical Islamic knowledge in both English and Arabic. The site provides an elegant, responsive interface and includes features like search, cart, seller dashboard, and more — with ongoing development toward a complete e-commerce experience.
+Summary:
+Islamic Books is a full-stack, production-ready web application that provides access to a growing collection of classical Islamic literature in both English and Arabic. It features a dynamic catalog, seller dashboard, cart system, and search — built with modern technologies and scalability in mind. Currently under active development with backend and Stripe integration in progress.
 
 ---
 
 ## 🛠️ Technologies Used
 
-* **React.js** – Component-based architecture for scalable UI.
-* **Vite** – Ultra-fast development environment and optimized builds.
-* **Tailwind CSS** – Utility-first CSS for custom responsive design.
-* **React Router** – Client-side navigation across public and seller routes.
-* **Vercel** – Frontend hosting and continuous deployment.
-* **Stripe (in progress)** – Integration for secure online payments.
-* **Git & GitHub** – Source control and project collaboration.
+
+| Frontend     | Backend (in progress) | Deployment        | Other Integrations                |
+| ------------ | --------------------- | ----------------- | --------------------------------- |
+| React.js     | Node.js + Express     | Vercel (Frontend) | Stripe (Payments) *(in progress)* |
+| Vite         | MongoDB (planned)     | GitHub CI/CD      | Secure Auth *(in progress)*       |
+| Tailwind CSS | REST API              |                   | Role-Based Access *(in progress)* |
+| React Router |                       |                   |                                   |
 
 ---
 
-## ✨ Features
+## ⚙️ Key Features
 
-* ✅ **Responsive Design** – Mobile-friendly and consistent on all screen sizes.
-* ✅ **Live Search by Book Name** – Real-time filtering of books.
-* ✅ **Cart Functionality** – Add/remove books to cart and prepare for checkout.
-* ✅ **Seller/Admin Dashboard** – Accessible via `/seller`, allowing book management and upload.
-* ✅ **Book Listing** – Browse curated Islamic books with clean, minimal layout.
-* ✅ **Dark Theme UI** – Sleek, accessible dark interface for better reading.
-* ✅ **Scalable Codebase** – Designed to grow with backend/API integrations.
+🔍 Live Search by Book Name – Real-time filtering from the book catalog.
+
+🛒 Cart Functionality – Add/remove items with future checkout integration.
+
+👤 Secure Authentication (in progress) – User & seller login with protected routes.
+
+📚 Book Management – Upload and manage books via the seller dashboard.
+
+📊 Seller/Admin Dashboard – Navigate to /seller for a role-based control panel.
+
+🌙 Modern UI – Tailored dark theme for readability and aesthetics.
+
+⚡ Optimized Performance – Vite-powered builds for fast load times.
+
+📱 Mobile Responsive – Fluid layout across phones, tablets, and desktops.
 
 ---
 
@@ -58,31 +66,46 @@ islamic-books/
 
 ## 💼 Why This Project Stands Out
 
-* 📌 **Full-Stack Capable**: While only the frontend is live now, I’m actively building a robust backend with Node.js and Express.
-* 🔐 **Authentication in Progress**: Working on secure login and role-based access control.
-* 💳 **Real Payments**: Stripe integration for real book purchases is in progress.
-* 🛒 **Real-World Functionality**: From shopping cart to seller uploads, it mimics a real e-commerce platform.
-* 📈 **Scalable Architecture**: Designed as a monorepo to separate frontend/backend concerns and support future microservices.
-* 📘 **Mission-Driven**: Beyond technical goals, the project serves a purpose — spreading timeless Islamic knowledge.
-* 🧠 **Self-Learned & Built From Scratch**: Demonstrates my ability to independently build a production-ready application using the MERN stack.
+✅ Built for Real Use: Not just a demo — this project solves a real-world problem with real users in mind.
+
+🔧 Backend in Progress: Full Express backend under construction with user/book/order management.
+
+💳 Stripe Integration (in progress): Will support secure payments for digital/physical books.
+
+🔐 Secure & Role-Aware: Login for users and sellers, with route protection (in progress).
+
+🚀 Scalable Design: Modular codebase with separate folders for frontend/backend — easy to expand to microservices.
+
+🌍 Mission-Driven: Spreading beneficial Islamic knowledge, not just building for tech's sake.
+
+🧠 Self-Taught Developer: Demonstrates my ability to learn fast, build full-stack apps independently, and solve problems end-to-end.
 
 ---
 
-## 🔮 Future Enhancements
+## 🔮 Roadmap & Enhancements
 
-* 🔧 **Backend API** *(in progress)* – Node.js/Express backend to manage books, orders, sellers, and users.
-* 🔐 **Secure Authentication & Role-Based Access** *(in progress)* – Login and registration system with seller/user roles.
-* 💳 **Stripe Payment Integration** *(in progress)* – Accept secure payments for book purchases.
-* 🧾 **Order History & Invoices** – Allow users to track purchases and download receipts.
-* 🧠 **Advanced Search Filters** – Search by author, category, language, and tags (currently supports book name).
-* 📦 **Enhanced Seller Dashboard** – Expand existing `/seller` panel with analytics, order management, inventory alerts, and earnings reports.
-* 📘 **Book Previews/Readers** – Enable in-browser reading with pagination and bookmarking.
+🧱 Backend API for dynamic book/order/user management (in progress)
+
+🔐 Secure authentication with JWT + password hashing (in progress)
+
+💳 Stripe checkout integration (in progress)
+
+📄 Order history and download receipts for users
+
+🧠 Advanced search filters (by author, language, category)
+
+📈 Dashboard analytics for sellers (books sold, orders, earnings)
+
+📘 In-browser book reader with bookmarking and pagination
+
+🌐 Multilingual support for wider reach (planned)
 
 ---
 
 ## 📬 Contact
 
-Have suggestions or want to collaborate?
-📧 Email: `your-email@example.com`
+Interested in hiring, collaborating, or contributing?
+📧 Email: sharukhahmed0706@gmail.com
+🔗 LinkedIn (https://www.linkedin.com/in/sharukh-ahmed/)
 
 ---
