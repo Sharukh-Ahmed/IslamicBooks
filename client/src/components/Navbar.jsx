@@ -23,7 +23,7 @@ const Navbar = () => {
     return (
         <nav className="fixed top-0 left-0 right-0 w-full z-50 flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 shadow-lg shadow-black/90 bg-black/90 transition-all">
 
-            <div onClick={() => setOpen(false)} className='flex items-center gap-3'>
+            <div onClick={() => {setOpen(false); scrollTo(0,0)}} className='flex items-center gap-3'>
                 <NavLink to='/' >
                     <img className='h-9' src="/Site Logo.png" alt="dummyLogoColored"></img>
                 </NavLink>
