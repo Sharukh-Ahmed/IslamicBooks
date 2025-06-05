@@ -39,7 +39,7 @@ const Cart = () => {
     //     { name: "Running Shoes", description: ["Lightweight and comfortable", "Breathable mesh upper", "Ideal for jogging and casual wear"], offerPrice: 250, price: 200, quantity: 1, size: 42, image: "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/card/productImage3.png", category: "Footwear", },
     // ]
     return products.length > 0 && cartItems ? (
-        <div className="flex flex-col md:flex-row mt-24 text-white">
+        <div className="flex flex-col md:flex-row mt-28 text-white">
             <div className='flex-1 max-w-4xl'>
                 <h1 className="text-3xl font-medium mb-6">
                     Shopping Cart <span className="text-sm text-primary">{`${getCartCount()} items`}</span>

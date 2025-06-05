@@ -48,7 +48,7 @@ const ProductDetails = () => {
     
 
 return product && (
-    <div className="mt-24 text-white">
+    <div className="mt-28 text-white">
         <p>
             <Link to={"/"}>Home</Link> /
             <Link to={"/books"}> Books</Link> /

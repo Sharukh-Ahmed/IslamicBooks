@@ -56,6 +56,7 @@ const Navbar = () => {
                         <img src={assets.profile_icon} alt='profile_icon' className='w-10 hover:cursor-pointer'></img>
                         <ul className='hidden group-hover:block absolute top-10 right-0 bg-gray-500 shadow-border border-gray-200 py-2.5 w-30 rounded-md text-sm z-40'>
                             <li onClick={() => { navigate("my-orders") }} className='p-1.5 pl-3 hover:bg-primary/30 cursor-pointer'>My Orders</li>
+                            <li onClick={() => { navigate("/seller") }} className='p-1.5 pl-3 hover:bg-primary/30 cursor-pointer'>Seller?</li>
                             <li onClick={logout} className='p-1.5'><button onClick={() => setShowUserLogin(true)} className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition-all duration-300 text-white rounded-full">
                                 Logout
                             </button></li>
@@ -89,9 +90,9 @@ const Navbar = () => {
                     <NavLink to='/' onClick={() => setOpen(false)}>Home</NavLink>
                     <NavLink to='/books' onClick={() => setOpen(false)}>All Books</NavLink>
                     {user &&
-                        <NavLink to='/' onClick={() => setOpen(false)}>My Orders</NavLink>
+                        <NavLink to='/my-orders' onClick={() => setOpen(false)}>My Orders</NavLink>
                     }
-                    <NavLink to='/' onClick={() => setOpen(false)}>Contact</NavLink>
+                    <NavLink to='/seller' onClick={() => setOpen(false)}>Seller?</NavLink>
 
                     {!user ? (<button onClick={() => {
                         setOpen(false);

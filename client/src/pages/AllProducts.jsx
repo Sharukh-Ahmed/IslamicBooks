@@ -18,7 +18,7 @@ const AllProducts = () => {
     }, [products, searchQuery])
 
   return (
-    <div className='mt-24 flex flex-col text-white'>
+    <div className='mt-28 flex flex-col text-white'>
         <div className='flex flex-col items-end w-max'>
         <p className='text-2xl font-medium uppercase'>All Books</p>
         <div className='w-16 h-0.5 bg-primary rounded-full'></div>

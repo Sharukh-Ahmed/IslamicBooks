@@ -3,7 +3,7 @@ import React from 'react'
 const About = () => {
     return (
     
-    <div className='mt-24'>
+    <div className='mt-28'>
         {/* <div className='flex flex-col items-end w-max text-white'>
             <p className='text-2xl text-white font-medium'>About</p>
             <div className='w-16 h-0.5 bg-primary rounded-full'></div>
