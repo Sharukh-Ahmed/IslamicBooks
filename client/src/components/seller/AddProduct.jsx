@@ -1,19 +1,59 @@
 import React, { useState } from 'react'
 import { assets, categories } from '../../assets/assets';
+import { useAppContext } from '../../context/Appcontext';
+import toast from 'react-hot-toast';
 
 const AddProduct = () => {
 
     const [files, setFiles] = useState([])
     const [name, setName] = useState('');
+    const [author, setAuthor] = useState('');
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('');
     const [price, setPrice] = useState('');
     const [offerPrice, setOfferPrice] = useState('');
 
+    const { axios } = useAppContext()
+
     const onSubmitHandler = async (event) => {
-        event.preventDefault(); 
+        try {
+            event.preventDefault();
+
+            const productData = {
+                name,
+                author,
+                description: description.split('\n'),
+                category,
+                price,
+                offerPrice
+            }
+
+            const formData = new FormData();
+            formData.append('productData', JSON.stringify(productData))
+            for (let i = 0; i < files.length; i++) {
+                formData.append('images', files[i])
+            }
+
+            const { data } = await axios.post('/api/product/add', formData);
+
+            if (data.success) {
+                toast.success(data.message)
+                setName('')
+                setAuthor('')
+                setDescription('')
+                setCategory('')
+                setPrice('')
+                setOfferPrice('')
+                setFiles([])
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+
+        }
     }
- 
+
     return (
         <div className="no-scrollbar flex-1 h-[95vh] overflow-y-scroll flex flex-col justify-between">
             <form onSubmit={onSubmitHandler} className="md:p-10 p-4 space-y-5 max-w-lg">
@@ -22,12 +62,12 @@ const AddProduct = () => {
                     <div className="flex flex-wrap items-center gap-3 mt-2">
                         {Array(4).fill('').map((_, index) => (
                             <label key={index} htmlFor={`image${index}`}>
-                                <input onChange={(e)=> {
+                                <input onChange={(e) => {
                                     const updatedFiles = [...files];
                                     updatedFiles[index] = e.target.files[0]
                                     setFiles(updatedFiles)
                                 }}
-                                accept="image/*" type="file" id={`image${index}`} hidden />
+                                    accept="image/*" type="file" id={`image${index}`} hidden />
                                 <img className="max-w-24 cursor-pointer" src={files[index] ? URL.createObjectURL(files[index]) : assets.upload_area} alt="uploadArea" width={100} height={100} />
                             </label>
                         ))}
@@ -36,6 +76,10 @@ const AddProduct = () => {
                 <div className="flex flex-col gap-1 max-w-md">
                     <label className="text-base font-medium" htmlFor="product-name">Product Name</label>
                     <input onChange={(e) => setName(e.target.value)} value={name} id="product-name" type="text" placeholder="Type here" className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40" required />
+                </div>
+                <div className="flex flex-col gap-1 max-w-md">
+                    <label className="text-base font-medium" htmlFor="product-author">Product Author</label>
+                    <input onChange={(e) => setAuthor(e.target.value)} value={author} id="product-author" type="text" placeholder="Type here" className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40" required />
                 </div>
                 <div className="flex flex-col gap-1 max-w-md">
                     <label className="text-base font-medium" htmlFor="product-description">Product Description</label>
@@ -47,7 +91,7 @@ const AddProduct = () => {
                         <option value="">Select Category</option>
                         {/* {[{ name: 'Electronics' }, { name: 'Clothing' }, { name: 'Accessories' }] */}
                         {categories.map((item, index) => (
-                            <option  key={index} value={item.text}>{item.text}</option>
+                            <option key={index} value={item.text}>{item.text}</option>
                         ))}
                     </select>
                 </div>

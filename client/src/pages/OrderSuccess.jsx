@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
+import MyOrders from '../pages/MyOrders'
 
 export default function OrderSuccess() {
-  return (
+  return ( <>
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-zinc-900 to-zinc-800 text-white p-6">
       <div className="max-w-md w-full text-center bg-zinc-950 p-8 rounded-2xl shadow-xl border border-zinc-700">
         <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
@@ -18,5 +19,9 @@ export default function OrderSuccess() {
         </Link>
       </div>
     </div>
+    <div className="flex justify-center items-center">
+    <MyOrders/>
+    </div>
+    </>
   );
 }

@@ -1,0 +1,12 @@
+npm install 
+bcryptjs - for password encryption
+cloudinary - for image upload in cloud
+cookie-parser - for parsing cookies for user authentication
+cors - for enabling CORS in the application and connecting frontend and backend
+dotenv - for environment variables
+express - for creating the server
+jsonwebtoken - for generating JWT tokens for user authentication
+mongoose - for connecting to MongoDB
+multer - for handling file uploads
+stripe - for payment processing
+nodemon - for running the server in development mode

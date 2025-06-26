@@ -3,13 +3,14 @@ import { useState } from 'react'
 import { useAppContext } from '../context/Appcontext'
 import { dummyAddress } from '../assets/assets'
 import ImageSlider from '../components/ImageSlider'
+import toast from 'react-hot-toast'
 
 const Cart = () => {
     const [showAddress, setShowAddress] = React.useState(false)
-    const { products, currency, cartItems, removeFromCart, updateCartItem, navigate, getCartCount, getCartAmount } = useAppContext()
+    const { products, currency, cartItems, removeFromCart, updateCartItem, navigate, getCartCount, getCartAmount, axios, user, setCartItems } = useAppContext()
     const [cartArray, setCartArray] = useState([]);
-    const [addresses, setAddresses] = useState(dummyAddress);
-    const [selectedAddress, setSelectedAddress] = useState(dummyAddress[0]);
+    const [addresses, setAddresses] = useState([]);
+    const [selectedAddress, setSelectedAddress] = useState(null);
     const [paymentOption, setPaymentOption] = useState("COD");
 
     const getCart = () => {
@@ -22,14 +23,62 @@ const Cart = () => {
         setCartArray(tempArray)
     }
 
+    const getUserAddress = async () => {
+        try {
+            const { data } = await axios.get('/api/address/get')
+            if (data.success) {
+                setAddresses([...data.addresses, ...dummyAddress])
+                if (data.addresses.length > 0) {
+                    setSelectedAddress(data.addresses[0])
+                }
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+
+        }
+    }
+
     useEffect(() => {
         if (products.length > 0 && cartItems) {
             getCart();
         }
     }, [products, cartItems])
 
-    const placeOrder = async ()=> {
-        navigate("/order-success")
+    useEffect(() => {
+        if (user) {
+            getUserAddress()
+        }
+    }, [user])
+
+    const placeOrder = async () => {
+        try {
+            if (!selectedAddress) {
+                return toast.error("Please Select an Address!")
+            }
+
+            //Place Order with COD
+            if (paymentOption === "COD") {
+                const { data } = await axios.post('/api/order/cod', {
+                    userId: user._id,
+                    items: cartArray.map(item => ({ product: item._id, quantity: item.quantity })),
+                    address: selectedAddress._id
+                })
+
+                if (data.success) {
+                    toast.success(data.message)
+                    setCartItems({})
+                    navigate("/order-success")
+                } else {
+                    toast.error(data.message)
+                }
+            }
+
+        } catch (error) {
+            toast.error(error.message)
+
+        }
     }
 
 
@@ -105,8 +154,8 @@ const Cart = () => {
                         </button>
                         {showAddress && (
                             <div className="absolute top-12 py-1 bg-white border border-gray-300 text-sm w-full">
-                                {addresses.map((address, index)=>(<p onClick={() => {setSelectedAddress(address); setShowAddress(false)}} className="text-gray-800 p-2 hover:bg-gray-100">
-                                    {address.street}, {address.city}, {address.state}, {address.country} 
+                                {addresses.map((address, index) => (<p onClick={() => { setSelectedAddress(address); setShowAddress(false) }} className="text-gray-800 p-2 hover:bg-gray-100">
+                                    {address.street}, {address.city}, {address.state}, {address.country}
                                 </p>))}
                                 <p onClick={() => navigate("/add-address")} className="text-primary text-center cursor-pointer p-2 hover:bg-primary/10">
                                     Add address
@@ -117,7 +166,7 @@ const Cart = () => {
 
                     <p className="text-sm font-medium uppercase mt-6">Payment Method</p>
 
-                    <select onChange={e => setPaymentOption(e.target.value) } className="w-full text-black border border-gray-300 bg-white px-3 py-2 mt-2 outline-none">
+                    <select onChange={e => setPaymentOption(e.target.value)} className="w-full text-black border border-gray-300 bg-white px-3 py-2 mt-2 outline-none">
                         <option value="COD">Cash On Delivery</option>
                         <option value="Online">Online Payment</option>
                     </select>
@@ -145,7 +194,7 @@ const Cart = () => {
                 </button>
             </div>
         </div>
-        
+
     ) : null
 }
 

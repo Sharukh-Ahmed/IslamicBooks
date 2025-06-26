@@ -3,19 +3,34 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { assets } from '../assets/assets.js'
 import { useAppContext } from '../context/Appcontext.jsx'
+import toast from 'react-hot-toast'
 
 const Navbar = () => {
 
     const [open, setOpen] = useState(false);
-    const { user, setUser, setShowUserLogin, navigate, setSearchQuery, searchQuery, getCartCount } = useAppContext();
+    const { user, setUser, setShowUserLogin, navigate, setSearchQuery, searchQuery, getCartCount, axios } = useAppContext();
 
     const logout = async () => {
-        setUser(null);
-        navigate('/')
+
+        try {
+            const { data } = await axios.get('/api/user/logout')
+            if (data.success) {
+                toast.success(data.message)
+                setUser(null);
+                navigate('/')
+
+
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+
+        }
     }
 
-    useEffect(()=> {
-        if(searchQuery.length > 0){
+    useEffect(() => {
+        if (searchQuery.length > 0) {
             navigate("/books")
         }
     }, [searchQuery])
@@ -23,7 +38,7 @@ const Navbar = () => {
     return (
         <nav className="fixed top-0 left-0 right-0 w-full z-50 flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 shadow-lg shadow-black/90 bg-black/90 transition-all">
 
-            <div onClick={() => {setOpen(false); scrollTo(0,0)}} className='flex items-center gap-3'>
+            <div onClick={() => { setOpen(false); scrollTo(0, 0) }} className='flex items-center gap-3'>
                 <NavLink to='/' >
                     <img className='h-9' src="/Site Logo.png" alt="dummyLogoColored"></img>
                 </NavLink>
@@ -38,7 +53,7 @@ const Navbar = () => {
                 <NavLink to='/about' className='hover:text-primary hover:text-shadow-lg hover:text-shadow-gray-400/50 transition-all duration-300'>About</NavLink>
 
                 <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
-                    <input onChange={(e)=> setSearchQuery(e.target.value)} className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500" type="text" placeholder="Search Books" />
+                    <input onChange={(e) => setSearchQuery(e.target.value)} className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500" type="text" placeholder="Search Books" />
                     <img src={assets.search_icon} alt='search' className='w-4 h-4'></img>
                 </div>
 
@@ -57,7 +72,7 @@ const Navbar = () => {
                         <ul className='hidden group-hover:block absolute top-10 right-0 bg-gray-500 shadow-border border-gray-200 py-2.5 w-30 rounded-md text-sm z-40'>
                             <li onClick={() => { navigate("my-orders") }} className='p-1.5 pl-3 hover:bg-primary/30 cursor-pointer'>My Orders</li>
                             <li onClick={() => { navigate("/seller") }} className='p-1.5 pl-3 hover:bg-primary/30 cursor-pointer'>Seller?</li>
-                            <li onClick={logout} className='p-1.5'><button onClick={() => setShowUserLogin(true)} className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition-all duration-300 text-white rounded-full">
+                            <li onClick={logout} className='p-1.5'><button className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition-all duration-300 text-white rounded-full">
                                 Logout
                             </button></li>
                         </ul>
@@ -68,20 +83,20 @@ const Navbar = () => {
             </div>
 
             <div className='flex items-center gap-6 sm:hidden'>
-            <div onClick={() => navigate("cart")} className="relative cursor-pointer">
+                <div onClick={() => navigate("cart")} className="relative cursor-pointer">
                     <svg width="18" height="18" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M.583.583h2.333l1.564 7.81a1.17 1.17 0 0 0 1.166.94h5.67a1.17 1.17 0 0 0 1.167-.94l.933-4.893H3.5m2.333 8.75a.583.583 0 1 1-1.167 0 .583.583 0 0 1 1.167 0m6.417 0a.583.583 0 1 1-1.167 0 .583.583 0 0 1 1.167 0" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                     <button className="absolute -top-2 -right-3 text-xs text-white bg-primary w-[18px] h-[18px] rounded-full">{getCartCount()}</button>
                 </div>
-            <button onClick={() => open ? setOpen(false) : setOpen(true)} aria-label="Menu">
-                {/* Menu Icon SVG */}
-                <svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="21" height="1.5" rx=".75" fill="#F97316" />
-                    <rect x="8" y="6" width="13" height="1.5" rx=".75" fill="#F97316" />
-                    <rect x="6" y="13" width="15" height="1.5" rx=".75" fill="#F97316" />
-                </svg>
-            </button>
+                <button onClick={() => open ? setOpen(false) : setOpen(true)} aria-label="Menu">
+                    {/* Menu Icon SVG */}
+                    <svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="21" height="1.5" rx=".75" fill="#F97316" />
+                        <rect x="8" y="6" width="13" height="1.5" rx=".75" fill="#F97316" />
+                        <rect x="6" y="13" width="15" height="1.5" rx=".75" fill="#F97316" />
+                    </svg>
+                </button>
             </div>
 
             {/* Mobile Menu */}
@@ -100,7 +115,7 @@ const Navbar = () => {
                     }} className="cursor-pointer px-6 py-2 mt-2 bg-primary hover:bg-primary-dull transition text-white rounded-full text-sm">
                         Login
                     </button>) : (<button
-                        onClick={logout}
+                        onClick={()=>{logout(); setOpen(false)}}
                         className="cursor-pointer px-6 py-2 mt-2 bg-primary hover:bg-primary-dull transition text-white rounded-full text-sm">
                         Logout
                     </button>)}

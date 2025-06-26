@@ -1,20 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import { useAppContext } from '../context/Appcontext';
 import { dummyOrders } from '../assets/assets';
+import toast from 'react-hot-toast';
 
 const MyOrders = () => {
 
     const [myOrders, setMyOrders] = useState([]);
-    const { currency } = useAppContext();
+    const { currency, axios } = useAppContext();
 
     const fetchMyOrders = async () => {
-        setMyOrders(dummyOrders)
+        try {
+            const { data } = await axios.get('/api/order/user')
+            if (data.success) {
+
+                setMyOrders([...data.orders, ...dummyOrders])
+
+            } else {
+                toast.error(data.message)
+
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
     }
 
     useEffect(() => {
         fetchMyOrders();
 
-    }, [])
+    }, [myOrders])
 
     return (
         <div className='mt-28 pb-16 text-white'>
@@ -27,7 +40,7 @@ const MyOrders = () => {
                     <p className='flex justify-between md:items-center text-gray-400'>
                         <span>OrderId : {order._id}</span>
                         <span>Payment : {order.paymentType}</span>
-                        <span>Total Amount : {currency}{order.amount}</span>
+                        <span className='text-primary text-lg font-medium'>Total Amount : {currency}{order.amount}</span>
                     </p>
                     {order.items.map((item, index) => (
                         <div key={index} className={`relative bg-black text-gray-500/70 ${order.items.length !== index + 1 && "border-b"} border-gray-300 flex flex-col md:flex-row md:items-center justify-between p-4 py-5 md:gap-16 w-full max-w-4xl`}>
@@ -45,7 +58,7 @@ const MyOrders = () => {
                                 <p>Status: {order.status}</p>
                                 <p>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
                             </div>
-                            <p className='text-primary text-lg font-medium'>
+                            <p className='text-gray-400'>
                                 Amount: {currency}{item.product.offerPrice * item.quantity}
                             </p>
                         </div>
