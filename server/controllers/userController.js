@@ -84,13 +84,7 @@ export const login = async (req, res) => {
 
 export const isAuth = async (req, res) => {
     try {
-        // Get userId from either req.user._id or req.body.userId for compatibility
-        const userId = req.user?._id || req.body?.userId;
-        
-        if (!userId) {
-            return res.json({ success: false, message: "User ID not found" });
-        }
-        
+        const { userId } = req.body;
         const user = await User.findById(userId).select("-password")
         return res.json({ success: true, user })
 

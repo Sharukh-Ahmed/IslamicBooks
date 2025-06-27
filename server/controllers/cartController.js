@@ -4,14 +4,7 @@ import User from "../models/User.js"
 
 export const updateCart = async (req, res) => {
     try {
-        // Get userId from either req.user._id or req.body.userId for compatibility
-        const userId = req.user?._id || req.body?.userId;
-        const { cartItems } = req.body;
-        
-        if (!userId) {
-            return res.json({ success: false, message: "User ID not found" });
-        }
-        
+        const { userId, cartItems } = req.body
         await User.findByIdAndUpdate(userId, { cartItems })
         res.json({ success: true, message: "Cart Updated" })
 
