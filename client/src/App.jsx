@@ -23,6 +23,7 @@ import OrderSuccess from './pages/OrderSuccess.jsx'
 import NeedHelp from './pages/NeedHelp.jsx'
 import  Contact  from './pages/Contact.jsx'
 import FAQs from './pages/FAQs.jsx'
+import Loading from './components/Loading.jsx'
 
 const App = () => {
 
@@ -50,6 +51,8 @@ const App = () => {
           <Route path="/need-help" element={<NeedHelp />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faqs" element={<FAQs />} />
+          <Route path="/loader" element={<Loading />} />
+
           <Route path='/seller' element={isSeller ? <SellerLayout/> : <SellerLogin/>}>
             <Route index element={isSeller ? <AddProduct/> : null}/>
             <Route path='product-list' element={<ProductList/>}/>

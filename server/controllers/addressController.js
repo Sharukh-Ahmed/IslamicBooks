@@ -4,7 +4,14 @@ import Address from "../models/Address.js"
 //Add Address : /api/address/add
 export const addAddress = async (req, res) => {
     try {
-        const { address, userId } = req.body
+        // Get userId from either req.user._id or req.body.userId for compatibility
+        const userId = req.user?._id || req.body?.userId;
+        const { address } = req.body;
+        
+        if (!userId) {
+            return res.json({ success: false, message: "User ID not found" });
+        }
+        
         await Address.create({ ...address, userId })
         res.json({ success: true, message: "Address Added Successfully" })
 
@@ -18,7 +25,13 @@ export const addAddress = async (req, res) => {
 //Get Address : /api/address/get
 export const getAddress = async (req, res) => {
     try {
-        const { userId } = req.body
+        // Get userId from either req.user._id or req.body.userId for compatibility
+        const userId = req.user?._id || req.body?.userId;
+        
+        if (!userId) {
+            return res.json({ success: false, message: "User ID not found" });
+        }
+        
         const addresses = await Address.find({ userId })
         res.json({ success: true, addresses })
 

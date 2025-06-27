@@ -84,13 +84,42 @@ export const login = async (req, res) => {
 
 export const isAuth = async (req, res) => {
     try {
-        const { userId } = req.body;
+        // Get userId from either req.user._id or req.body.userId for compatibility
+        const userId = req.user?._id || req.body?.userId;
+        
+        if (!userId) {
+            return res.json({ success: false, message: "User ID not found" });
+        }
+        
         const user = await User.findById(userId).select("-password")
         return res.json({ success: true, user })
 
     } catch (error) {
         res.json({ success: false, message: error.message })
 
+    }
+}
+
+// Test authentication endpoint
+export const testAuth = async (req, res) => {
+    try {
+        // Get userId from either req.user._id or req.body.userId for compatibility
+        const userId = req.user?._id || req.body?.userId;
+        
+        console.log('Test auth - req.user:', req.user);
+        console.log('Test auth - req.body.userId:', req.body?.userId);
+        console.log('Test auth - final userId:', userId);
+        
+        if (!userId) {
+            return res.json({ success: false, message: "User ID not found" });
+        }
+        
+        const user = await User.findById(userId).select("-password")
+        return res.json({ success: true, user, message: "Authentication working" })
+
+    } catch (error) {
+        console.error('Test auth error:', error);
+        res.json({ success: false, message: error.message })
     }
 }
 

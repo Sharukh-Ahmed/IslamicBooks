@@ -234,7 +234,7 @@ export const features = [
 ];
 
 export const dummyProducts = [
-  // Vegetables
+
   {
     _id: "book1",
     name: "Aqeedah Al Wasitiyyah",

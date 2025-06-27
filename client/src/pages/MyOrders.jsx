@@ -13,7 +13,7 @@ const MyOrders = () => {
             const { data } = await axios.get('/api/order/user')
             if (data.success) {
 
-                setMyOrders([...data.orders, ...dummyOrders])
+                setMyOrders(data.orders)
 
             } else {
                 toast.error(data.message)
