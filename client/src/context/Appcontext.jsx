@@ -126,10 +126,25 @@ export const AppContextProvider = ({ children }) => {
         return Math.floor(totalAmount * 100) / 100;
     }
 
+    //Debug function to test cookie transmission
+    const debugCookies = async () => {
+        try {
+            console.log('Testing cookie transmission...');
+            const { data } = await axios.get('/api/user/debug-cookies', { withCredentials: true });
+            console.log('Debug response:', data);
+            return data;
+        } catch (error) {
+            console.error('Debug error:', error);
+            return null;
+        }
+    }
+
     useEffect(() => {
         fetchSeller();
         fetchUser();
         fetchProducts();
+        // Uncomment the next line to debug cookies
+        // debugCookies();
     }, [])
 
     useEffect(() => {
@@ -151,7 +166,7 @@ export const AppContextProvider = ({ children }) => {
 
     }, [cartItems])
 
-    const value = { navigate, user, setUser, isSeller, setIsSeller, showUserLogin, setShowUserLogin, products, currency, addToCart, updateCartItem, removeFromCart, cartItems, searchQuery, setSearchQuery, getCartCount, getCartAmount, axios, fetchProducts, setCartItems }
+    const value = { navigate, user, setUser, isSeller, setIsSeller, showUserLogin, setShowUserLogin, products, currency, addToCart, updateCartItem, removeFromCart, cartItems, searchQuery, setSearchQuery, getCartCount, getCartAmount, axios, fetchProducts, setCartItems, debugCookies }
 
     return <AppContext.Provider value={value}>
         {children}

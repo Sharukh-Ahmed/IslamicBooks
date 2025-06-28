@@ -26,9 +26,10 @@ export const register = async (req, res) => {
 
         res.cookie('token', token, {
             httpOnly: true, //Prevent Javascript to access cookie
-            secure: process.env.NODE_ENV === 'production', //Use secure cookie in production
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict', //CSRF Protection
+            secure: true, //Always use secure cookie for HTTPS
+            sameSite: 'none', //Allow cross-site cookies
             maxAge: 7 * 24 * 60 * 60 * 1000, //Cookie expiration time
+            domain: undefined //Let the browser set the domain automatically
         })
 
         return res.json({ success: true, user: { email: user.email, name: user.name } })
@@ -65,9 +66,10 @@ export const login = async (req, res) => {
 
         res.cookie('token', token, {
             httpOnly: true, //Prevent Javascript to access cookie
-            secure: process.env.NODE_ENV === 'production', //Use secure cookie in production
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict', //CSRF Protection
+            secure: true, //Always use secure cookie for HTTPS
+            sameSite: 'none', //Allow cross-site cookies
             maxAge: 7 * 24 * 60 * 60 * 1000, //Cookie expiration time
+            domain: undefined //Let the browser set the domain automatically
         })
 
         return res.json({ success: true, user: { email: user.email, name: user.name }, message: `Hi ${user.name}` })
@@ -117,13 +119,37 @@ export const testAuth = async (req, res) => {
     }
 }
 
+// Debug endpoint to check cookies
+export const debugCookies = async (req, res) => {
+    try {
+        console.log('All cookies:', req.cookies);
+        console.log('Token cookie:', req.cookies.token);
+        console.log('Headers:', req.headers);
+        
+        return res.json({ 
+            success: true, 
+            cookies: req.cookies,
+            hasToken: !!req.cookies.token,
+            headers: {
+                origin: req.headers.origin,
+                referer: req.headers.referer,
+                'user-agent': req.headers['user-agent']
+            }
+        });
+    } catch (error) {
+        console.error('Debug error:', error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
 //Logout User: /api/user/logout
 export const logout = async (req, res) => {
     try {
         res.clearCookie('token', {
             httpOnly: true, //Prevent Javascript to access cookie
-            secure: process.env.NODE_ENV === 'production', //Use secure cookie in production
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict', //CSRF Protection
+            secure: true, //Always use secure cookie for HTTPS
+            sameSite: 'none', //Allow cross-site cookies
+            domain: undefined //Let the browser set the domain automatically
         });
         return res.json({ success: true, message: "Logged Out" })
     } catch (error) {

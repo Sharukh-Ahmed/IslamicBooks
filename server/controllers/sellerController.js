@@ -11,9 +11,10 @@ export const sellerLogin = async (req, res) => {
 
             res.cookie('sellerToken', token, {
                 httpOnly: true, //Prevent Javascript to access cookie
-                secure: process.env.NODE_ENV === 'production', //Use secure cookie in production
-                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict', //CSRF Protection
+                secure: true, //Always use secure cookie for HTTPS
+                sameSite: 'none', //Allow cross-site cookies
                 maxAge: 7 * 24 * 60 * 60 * 1000, //Cookie expiration time
+                domain: undefined //Let the browser set the domain automatically
             });
 
             return res.json({ success: true, message: "Logged In" });
@@ -47,8 +48,9 @@ export const sellerLogout = async (req, res) => {
     try {
         res.clearCookie('sellerToken', {
             httpOnly: true, //Prevent Javascript to access cookie
-            secure: process.env.NODE_ENV === 'production', //Use secure cookie in production
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict', //CSRF Protection
+            secure: true, //Always use secure cookie for HTTPS
+            sameSite: 'none', //Allow cross-site cookies
+            domain: undefined //Let the browser set the domain automatically
         });
         return res.json({ success: true, message: "Logged Out" })
     } catch (error) {
