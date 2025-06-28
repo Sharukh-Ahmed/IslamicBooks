@@ -19,14 +19,19 @@ await connectDB()
 await connectCloudinary()
 
 //Allow multiple origins
-const allowedOrigins = ['https://islamic-books.vercel.app']
+const allowedOrigins = ['https://islamic-books.vercel.app', 'http://localhost:5173']
 
 app.post('/stripe', express.raw({type: 'application/json'}), stripeWebhooks)
 
 //middleware configuration
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({origin: allowedOrigins, credentials: true}));
+app.use(cors({
+    origin: allowedOrigins, 
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 
 app.get('/', (req, res)=> res.send("API is Working"));
