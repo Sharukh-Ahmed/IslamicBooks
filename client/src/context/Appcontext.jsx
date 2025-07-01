@@ -19,6 +19,7 @@ export const AppContextProvider = ({ children }) => {
     const [isSeller, setIsSeller] = useState(false)
     const [showUserLogin, setShowUserLogin] = useState(false)
     const [products, setProducts] = useState([])
+    const [loadingProducts, setLoadingProducts] = useState(true)
     const [cartItems, setCartItems] = useState({})
     const [searchQuery, setSearchQuery] = useState({})
 
@@ -55,6 +56,7 @@ export const AppContextProvider = ({ children }) => {
 
     //fetch all Products
     const fetchProducts = async () => {
+        setLoadingProducts(true);
         try {
             const { data } = await axios.get('/api/product/list')
 
@@ -66,6 +68,8 @@ export const AppContextProvider = ({ children }) => {
             }
         } catch (error) {
             toast.error(error.message)
+        } finally {
+            setLoadingProducts(false);
         }
     }
 
@@ -166,7 +170,7 @@ export const AppContextProvider = ({ children }) => {
 
     }, [cartItems])
 
-    const value = { navigate, user, setUser, isSeller, setIsSeller, showUserLogin, setShowUserLogin, products, currency, addToCart, updateCartItem, removeFromCart, cartItems, searchQuery, setSearchQuery, getCartCount, getCartAmount, axios, fetchProducts, setCartItems, debugCookies }
+    const value = { navigate, user, setUser, isSeller, setIsSeller, showUserLogin, setShowUserLogin, products, currency, addToCart, updateCartItem, removeFromCart, cartItems, searchQuery, setSearchQuery, getCartCount, getCartAmount, axios, fetchProducts, setCartItems, debugCookies, loadingProducts }
 
     return <AppContext.Provider value={value}>
         {children}
