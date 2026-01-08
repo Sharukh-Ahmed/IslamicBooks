@@ -26,8 +26,8 @@ const Footer = () => {
     {
       title: "Follow Us",
       links: [
-        { label: "GitHub", external: "https://github.com/Sharukh-Ahmed" },
-        { label: "LinkedIn", external: "https://www.linkedin.com/in/sharukh-ahmed/" },
+        { label: "GitHub", external: "https://github.com/SFH989" },
+        { label: "LinkedIn", external: "www.linkedin.com/in/shaik-faisal-hamid-0b368020b" },
         // { label: "", external: "https://facebook.com/yourpage" },
         { label: "YouTube", external: "https://www.youtube.com/@rahhatalqalb9689" }
       ]

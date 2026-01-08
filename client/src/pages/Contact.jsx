@@ -41,13 +41,13 @@ const ContactUs = () => {
           <a href="mailto:rahhatalqalb@gmail.com" className="flex items-center gap-2 hover:text-orange-400">
             <Mail size={18} /> rahhatalqalb@gmail.com
           </a>
-          <a href="mailto:sharukhahmed0706@gmail.com" className="flex items-center gap-2 hover:text-orange-400">
-            <Mail size={18} /> sharukhahmed0706@gmail.com
+          <a href="mailto:shaikfaisalhamid27567@gmail.com" className="flex items-center gap-2 hover:text-orange-400">
+            <Mail size={18} /> shaikfaisalhamid27567@gmail.com
           </a>
-          <a href="https://www.linkedin.com/in/sharukh-ahmed/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-orange-400">
+          <a href="www.linkedin.com/in/shaik-faisal-hamid-0b368020b" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-orange-400">
             <Linkedin size={18} /> LinkedIn
           </a>
-          <a href="https://github.com/Sharukh-Ahmed" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-orange-400">
+          <a href="https://github.com/SFH989" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-orange-400">
             <Github size={18} /> GitHub
           </a>
         </div>

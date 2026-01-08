@@ -50,8 +50,8 @@ const About = () => {
           “And say: My Lord, increase me in knowledge.” — <strong>Qur’an 20:114</strong>
         </p>
         <div className="mt-4 text-gray-300">
-          📧 <span className="font-semibold">Contact:</span> sharukhahmed0706@gmail.com <br />
-          🌐 <span className="font-semibold">Follow:</span> Sharukh-Ahmed (GitHub)
+          📧 <span className="font-semibold">Contact:</span> shaikfaisalhamid27567@gmail.com <br />
+          🌐 <span className="font-semibold">Follow:</span> Shaik-Faisal-Hamid (GitHub)
         </div>
       </footer>
     </div>
