@@ -24,7 +24,7 @@ const About = () => {
       <section>
         <h2 className="text-3xl md:text-4xl font-bold text-orange-400 mb-4">👤 About Me – عني</h2>
         <p className="text-lg leading-relaxed text-gray-300">
-          I’m <strong>Sharukh Ahmed</strong>, a passionate student of Islamic knowledge and a full-time <strong>MERN stack and Mobile App developer</strong>. Originally a mechanical engineer, my love for technology and deep interest in classical Islamic texts led me to create this platform.
+          {/* I’m <strong>Shaik Faisal Hamid</strong>, a passionate student of Islamic knowledge and a full-time <strong>MERN stack and Mobile App developer</strong>. Originally a mechanical engineer, my love for technology and deep interest in classical Islamic texts led me to create this platform. */}
         </p>
         <p className="text-lg leading-relaxed text-gray-300 mt-2">
           🌱 My goal is simple: <strong>To preserve and spread timeless Islamic knowledge</strong> using modern technology, ensuring it reaches the hearts and minds of Muslims around the world.

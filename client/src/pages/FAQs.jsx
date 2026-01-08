@@ -60,11 +60,11 @@ const FAQs = () => {
     {
       category: "Personal Information",
       faqs: [
-        {
-          question: "What experience do you have in web development?",
-          answer:
-            "I transitioned from mechanical engineering to full-stack development and have built several projects—most notably, Islamic Books, which leverages the MERN stack.",
-        },
+        // {
+        //   question: "What experience do you have in web development?",
+        //   answer:
+        //     "I transitioned from mechanical engineering to full-stack development and have built several projects—most notably, Islamic Books, which leverages the MERN stack.",
+        // },
         {
           question: "What technical skills do you possess?",
           answer:
